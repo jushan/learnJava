@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!-- <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC
         "-//Hibernate//Hibernate Configuration DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
@@ -11,6 +11,6 @@
         <property name="hbm2ddl.auto">update</property>
 		<property name="show_sql">true</property>
         <property name="format_sql">true</property>
-        <mapping resource="employee.hbm.xml"/>
+        <mapping class="com.duecat_java.advancejava.entity.Employee"/>
     </session-factory>
-</hibernate-configuration>
+</hibernate-configuration> -->

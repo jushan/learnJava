@@ -5,10 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.duecat_java.advancejava.configuration.HibernateConfig;
 import com.duecat_java.advancejava.entity.Employee;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.SessionFactory;
+
+import jakarta.persistence.Query;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.MutationQuery;
 
 @SpringBootApplication
 public class AdvancejavaApplication {
@@ -36,9 +38,44 @@ public class AdvancejavaApplication {
 
 		Session session = HibernateConfig.getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
-		session.persist(employee);
+		// get single rolw data to load
+		// session.load(Employee.class, 1);
+
+		// session.persist(employee);
+		// tx.commit();
+		// session.close();
+
+		//org.hibernate.query.Query<Employee> query = session.createQuery("from Employee", Employee.class);
+	
+	// get the list of data from database
+		//List<Employee> employees = query.list();
+		// need to use for loop to print the data
+		// for(Employee employee1 : employees){
+		// 	System.out.println(employee1);
+		// }
+	
+		// query.setFetchSize(3);
+		// query.setMaxResults(6);
+		// query.getResultList().forEach(System.out::println);
+
+
+		// update records
+		// MutationQuery query = session.createMutationQuery(" update Employee set name = :name where id = :id");
+		// query.setParameter("name", "Jushan Ali");
+		// query.setParameter("id", 4);
+		// // query.setParameter("id", Integer.parseInt(args[1]));
+		// int result = query.executeUpdate();
+		// System.out.println("Number of rows updated: " + result);
+
+		MutationQuery query = session.createMutationQuery("delete from Employee where id = :id");
+		query.setParameter("id", 4);
+		int result = query.executeUpdate();
+		System.out.println("Number of rows deleted: " + result);
+
 		tx.commit();
 		session.close();
+
+
 	}
 
 

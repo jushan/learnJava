@@ -1,30 +1,32 @@
 package com.duecat_java.advancejava;
 
+import org.hibernate.Session;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import com.duecat_java.advancejava.configuration.HibernateConfig;
-import com.duecat_java.advancejava.entity.Employee;
-
-import jakarta.persistence.Query;
-
-import org.hibernate.Session;
+import com.duecat_java.advancejava.configuration.ConfigurationDetails;
+import com.duecat_java.advancejava.entity.EmployeeDetails;
 import org.hibernate.Transaction;
-import org.hibernate.query.MutationQuery;
+
+// import com.duecat_java.advancejava.configuration.HibernateConfig;
+// import com.duecat_java.advancejava.entity.Employee;
+
+// import org.hibernate.Session;
+// import org.hibernate.Transaction;
+// import org.hibernate.query.MutationQuery;
 
 @SpringBootApplication
 public class AdvancejavaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AdvancejavaApplication.class, args);
-		Employee employee = new Employee("smith", 34, "Male", "Technology", 500000.0);
-		System.out.println("Employee Details:");
-		System.out.println("ID: " + employee.getId());
-		System.out.println("Name: " + employee.getName());
-		System.out.println("Age: " + employee.getAge());
-		System.out.println("Gender: " + employee.getGender());
-		System.out.println("Department: " + employee.getDepartment());
-		System.out.println("Salary: " + employee.getSalary());	
+		// Employee employee = new Employee("smith", 34, "Male", "Technology", 500000.0);
+		// System.out.println("Employee Details:");
+		// System.out.println("ID: " + employee.getId());
+		// System.out.println("Name: " + employee.getName());
+		// System.out.println("Age: " + employee.getAge());
+		// System.out.println("Gender: " + employee.getGender());
+		// System.out.println("Department: " + employee.getDepartment());
+		// System.out.println("Salary: " + employee.getSalary());	
 
 
 		// generate configration for connection with database
@@ -36,8 +38,8 @@ public class AdvancejavaApplication {
 		// session.getTransaction().commit();
 		// session.close();
 
-		Session session = HibernateConfig.getSessionFactory().openSession();
-		Transaction tx = session.beginTransaction();
+		// Session session = HibernateConfig.getSessionFactory().openSession();
+		// Transaction tx = session.beginTransaction();
 		// get single rolw data to load
 		// session.load(Employee.class, 1);
 
@@ -67,15 +69,23 @@ public class AdvancejavaApplication {
 		// int result = query.executeUpdate();
 		// System.out.println("Number of rows updated: " + result);
 
-		MutationQuery query = session.createMutationQuery("delete from Employee where id = :id");
-		query.setParameter("id", 4);
-		int result = query.executeUpdate();
-		System.out.println("Number of rows deleted: " + result);
+		// MutationQuery query = session.createMutationQuery("delete from Employee where id = :id");
+		// query.setParameter("id", 4);
+		// int result = query.executeUpdate();
+		// System.out.println("Number of rows deleted: " + result);
 
-		tx.commit();
+		// tx.commit();
+		// session.close();
+
+
+		EmployeeDetails employeeDetails = new EmployeeDetails("Smith", "smith@example.com", "Male", 30, "Single", "123 Main St", "555-1234");
+
+		Session session = new ConfigurationDetails().getSessionFactory().openSession();
+		session.beginTransaction();
+		session.persist(employeeDetails);
+		Transaction transaction = session.getTransaction();
+		transaction.commit();
 		session.close();
-
-
 	}
 
 

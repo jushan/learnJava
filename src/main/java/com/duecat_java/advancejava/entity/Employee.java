@@ -7,6 +7,7 @@ public class Employee {
     private String gender;
     private String department;
     private double salary;
+    private Emp_address address;
 
     // No-arg constructor required by Hibernate
     public Employee() {
@@ -20,6 +21,11 @@ public class Employee {
         this.gender = gender;
         this.department = department;
         this.salary = salary;
+    }
+
+    public Employee(String name, int age, String gender, String department, double salary, Emp_address address) {
+        this(name, age, gender, department, salary);
+        this.address = address;
     }
 
     // Full constructor (ID may be set manually if needed)
@@ -73,6 +79,14 @@ public class Employee {
         this.salary = salary;
     }
 
+    public Emp_address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Emp_address address) {
+        this.address = address;
+    }
+
     public int getAge() {
         return age;
     }
@@ -90,7 +104,7 @@ public class Employee {
                 ", gender='" + gender + '\'' +
                 ", department='" + department + '\'' +
                 ", salary=" + salary +
-                ", age=" + age +
+                ", address=" + address +
                 '}';
     }
 }

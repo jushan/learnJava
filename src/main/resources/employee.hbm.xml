@@ -12,5 +12,10 @@
         <property name="gender" column="gender"/>
         <property name="department" column="department"/>
         <property name="salary" column="salary"/>
+        <many-to-one name="address" class="com.duecat_java.advancejava.entity.Emp_address" column="address_id" cascade="all"/>
         </class>
+
+        <query name="Employee.byName">
+            <![CDATA[from com.duecat_java.advancejava.entity.Employee e where e.name = :name]]>
+        </query>
         </hibernate-mapping>
